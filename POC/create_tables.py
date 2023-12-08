@@ -6,7 +6,12 @@ from dotenv import dotenv_values
 from dataclasses import dataclass
 
 # Import credentials from .env file
-creds = dotenv_values('creds.env')
+# Define config of app
+app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://username:password@localhost:port/DBNAME'  # RDS url
+
+# Initialize connection to database
+db = SQLAlchemy(app)
 
 """
 Table 1: Sample Level information
@@ -45,7 +50,6 @@ class Measurements(db.Model):
     link_id = db.Column(db.Integer, db.ForeignKey("sample_info.link_id")) # Link to measurements table
     intensity = db.Column(db.Text)
     ramanshift = db.Column(db.Text)
-
 
 # Creates all the tables
 with app.app_context():
