@@ -1,5 +1,4 @@
 python-dotenv
-psycopg2
 Flask
 Flask-SQLAlchemy
 flask-cors
